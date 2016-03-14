@@ -81,7 +81,7 @@ public class TestBMT {
 	@AfterClass
 	public void teardown(){
 		//close the app
-		//driver.quit();
+		driver.quit();
 	}
 	
 	}
