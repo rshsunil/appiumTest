@@ -5,12 +5,13 @@ package com.appium.test;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.util.concurrent.TimeUnit;
 
 //import org.openqa.selenium.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -19,17 +20,17 @@ public class TestBMT {
 
 	AndroidDriver driver;
 		
-	@Test
+	@BeforeTest
 	public void testbmtApp() throws MalformedURLException
 	
 	{
 		DesiredCapabilities capability = new DesiredCapabilities();
 		
-		capability.setCapability("deviceName", "Moto G");
-		//capability.setCapability("deviceName", "Nexus5 Simulator");
+		//capability.setCapability("deviceName", "Nexus5");
+		capability.setCapability("deviceName", "ONE A2003");
 		
 		capability.setCapability("platformName", "Android");
-		capability.setCapability("platformVersion", "6.0");
+		capability.setCapability("platformVersion", "5.1.1");
 		
 		capability.setCapability("appPackage", "com.opteamix.bookmytime");
 		// This package name of your app (you can get it from apk info app)
@@ -49,21 +50,24 @@ public class TestBMT {
 	@Test
 	public void testRegisteration() throws Exception{
 		
-
+	
+	//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     driver.findElement(By.id("com.google.android.googlequicksearchbox:id/icon")).click();
-    driver.wait(5000);
+	//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     
-    driver.findElement(By.name("Register")).click();
-		
-	driver.wait(5000);
+   //driver.findElement(By.id("com.opteamix.bookmytime:id/id_register")).click();
+    driver.findElement(By.id("com.opteamix.bookmytime:id/id_signIn")).click();
+	
+	//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
 		
 		
 	}
 	
 	
 	
-	@Test
-	/*public void testCal() throws Exception {
+	/*@Test
+	public void testCal() throws Exception {
 	   //locate the Text on the calculator by using By.name()
 	   WebElement two=driver.findElement(By.name("2"));
 	   two.click();
@@ -83,7 +87,7 @@ public class TestBMT {
 	@AfterClass
 	public void teardown(){
 		//close the app
-		driver.quit();
+	 driver.quit();
 	}
 	
 	}
