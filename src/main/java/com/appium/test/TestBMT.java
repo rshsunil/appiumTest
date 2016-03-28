@@ -9,12 +9,15 @@ import java.util.concurrent.TimeUnit;
 
 //import org.openqa.selenium.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
+import junit.framework.Assert;
 
 public class TestBMT {
 
@@ -48,21 +51,45 @@ public class TestBMT {
 	
 	
 	@Test
-	public void testRegisteration() throws Exception{
+	public void testInstallation() throws Exception{
 		
 	
-	//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    driver.findElement(By.id("com.google.android.googlequicksearchbox:id/icon")).click();
-	//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    
-   //driver.findElement(By.id("com.opteamix.bookmytime:id/id_register")).click();
-    driver.findElement(By.id("com.opteamix.bookmytime:id/id_signIn")).click();
-	
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+   // driver.findElement(By.id("com.google.android.googlequicksearchbox:id/icon")).click();
+	    
+   driver.findElement(By.id("com.opteamix.bookmytime:id/id_signIn")).click();
+   	
 	//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		
-		
+		   
 	}
+	
+	
+	@Test
+	public void testUnSuccessfulLogin(){
+		
+		driver.findElement(By.id("com.opteamix.bookmytime:id/email")).click();
+		driver.findElement(By.id("com.opteamix.bookmytime:id/email")).sendKeys("abc@gmail.com");
+		
+		driver.findElement(By.id("com.opteamix.bookmytime:id/password")).click();
+		driver.findElement(By.id("com.opteamix.bookmytime:id/password")).sendKeys("11111");
+		
+		//driver.findElementById("").click();	
+		driver.scrollTo("SIGN IN");
+		driver.findElement(By.id("com.opteamix.bookmytime:id/email_sign_in_button")).click();
+		
+	
+		
+		//Assert.assert.equals("Invalid Credentials.");
+		WebElement alert = driver.findElement(By.id("com.opteamix.bookmytime:id/snackbar_text"));
+		
+		System.out.println(alert.getText());
+	
+		Assert.assertEquals(alert.getText(), "Invalid Credentials.");
+	   
+		driver.manage().timeouts().implicitlyWait(7,TimeUnit.SECONDS);
+	}
+	
 	
 	
 	
@@ -84,7 +111,7 @@ public class TestBMT {
 
 	}*/
 
-	@AfterClass
+	@AfterTest
 	public void teardown(){
 		//close the app
 	 driver.quit();
