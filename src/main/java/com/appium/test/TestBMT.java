@@ -2,6 +2,9 @@ package com.appium.test;
 
 
 
+import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.AssertJUnit;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,20 +20,20 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
-import junit.framework.Assert;
 
 public class TestBMT {
 
 	AndroidDriver driver;
 		
+
 	@BeforeTest
 	public void testbmtApp() throws MalformedURLException
 	
 	{
 		DesiredCapabilities capability = new DesiredCapabilities();
 		
-		//capability.setCapability("deviceName", "Nexus5");
-		capability.setCapability("deviceName", "ONE A2003");
+		capability.setCapability("deviceName", "Nexus 5");
+		//capability.setCapability("deviceName", "ONE A2003");
 		
 		capability.setCapability("platformName", "Android");
 		capability.setCapability("platformVersion", "5.1.1");
@@ -39,11 +42,11 @@ public class TestBMT {
 		// This package name of your app (you can get it from apk info app)
 		capability.setCapability("appActivity","com.opteamix.bookmytime.base.BMTAuthActivity");
 		
-		File file = new File ("C:\\Users\\srana\\Downloads\\BMT_ANDROID-1.0_04-MAR-2016.apk");
+		File file = new File ("//Users//Shared//Jenkins//Downloads//BMT_ANDROID-1.0_04-MAR-2016.apk");
 		capability.setCapability("app",file.getAbsolutePath());
 		
-	  driver = new AndroidDriver(new URL ("http://172.18.0.47:4723/wd/hub"),capability);
-		//driver = new AndroidDriver(new URL ("http://127.0.0.1:4723/wd/hub"),capability);
+	  //driver = new AndroidDriver(new URL ("http://172.18.0.47:4723/wd/hub"),capability);
+		driver = new AndroidDriver(new URL ("http://127.0.0.1:4723/wd/hub"),capability);
 		//driver.quit();
 		
 		
@@ -85,7 +88,7 @@ public class TestBMT {
 		
 		System.out.println(alert.getText());
 	
-		Assert.assertEquals(alert.getText(), "Invalid Credentials.");
+		 Assert.assertEquals(alert.getText(),"Invalid Credentials.");
 	   
 		driver.manage().timeouts().implicitlyWait(7,TimeUnit.SECONDS);
 	}
